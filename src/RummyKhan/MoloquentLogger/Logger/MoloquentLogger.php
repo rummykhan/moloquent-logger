@@ -8,8 +8,9 @@ use RummyKhan\MoloquentLogger\Model\MoloquentLog;
 
 trait MoloquentLogger
 {
-    public function logs() {
-        return $this->morphMany(MoloquentLog::class,'moloquent');
+    public function logs()
+    {
+        return $this->morphMany(MoloquentLog::class, 'moloquent');
     }
 
     public static function boot()
@@ -28,42 +29,48 @@ trait MoloquentLogger
 
     }
 
-    protected function moloquentCreated($action='create')
+    protected function moloquentCreated($action = 'create')
     {
-        $this->logs()->save(new MoloquentLog([
-            'after' => $this->getMoloquentChangedAttributes(),
-            'after_model' => $this->toArray(),
-            'scope' => $this->getMoloquentPublicScope('function', 'create'),
-            'user_id' => Auth::id() ?: null,
-            'action' => $action,
-            'request' => Request::all()
-        ]));
+        if ($this->shouldLog()) {
+            $this->logs()->save(new MoloquentLog([
+                'after' => $this->getMoloquentChangedAttributes(),
+                'after_model' => $this->toArray(),
+                'scope' => $this->getMoloquentPublicScope('function', 'create'),
+                'user_id' => Auth::id() ?: null,
+                'action' => $action,
+                'request' => Request::all()
+            ]));
+        }
     }
 
-    protected function moloquentUpdated($action='update')
+    protected function moloquentUpdated($action = 'update')
     {
-        $this->logs()->save(new MoloquentLog([
-            'before' => $this->getMoloquentDifferenceFromChanged(),
-            'after' => $this->getMoloquentChangedAttributes(),
-            'before_model' => $this->getMoloquentFresh(),
-            'after_model' => $this->toArray(),
-            'scope' => $this->getMoloquentPublicScope('function', 'save'),
-            'user_id' => Auth::id() ?: null,
-            'action' => $action,
-            'request' => Request::all()
-        ]));
+        if( $this->shouldLog() ){
+            $this->logs()->save(new MoloquentLog([
+                'before' => $this->getMoloquentDifferenceFromChanged(),
+                'after' => $this->getMoloquentChangedAttributes(),
+                'before_model' => $this->getMoloquentFresh(),
+                'after_model' => $this->toArray(),
+                'scope' => $this->getMoloquentPublicScope('function', 'save'),
+                'user_id' => Auth::id() ?: null,
+                'action' => $action,
+                'request' => Request::all()
+            ]));
+        }
     }
 
-    protected function moloquentDeleted($action='delete')
+    protected function moloquentDeleted($action = 'delete')
     {
-        $this->logs()->save(new MoloquentLog([
-            'before' => $this->getMoloquentDifferenceFromChanged(),
-            'before_model' => $this->getMoloquentFresh(),
-            'scope' => $this->getMoloquentPublicScope('function', 'delete'),
-            'user_id' => Auth::id() ?: null,
-            'action' => $action,
-            'request' => Request::all()
-        ]));
+        if( $this->shouldLog() ){
+            $this->logs()->save(new MoloquentLog([
+                'before' => $this->getMoloquentDifferenceFromChanged(),
+                'before_model' => $this->getMoloquentFresh(),
+                'scope' => $this->getMoloquentPublicScope('function', 'delete'),
+                'user_id' => Auth::id() ?: null,
+                'action' => $action,
+                'request' => Request::all()
+            ]));
+        }
     }
 
     /**
@@ -125,5 +132,13 @@ trait MoloquentLogger
         }
 
         return $backtrace;
+    }
+
+    /**
+     * check if current app environments not exist in ignore_environments in moloquent-logger config.
+     */
+    protected function shouldLog()
+    {
+        return in_array(env('APP_ENV'), config('moloquent-logger.ignore_environments'));
     }
 }
