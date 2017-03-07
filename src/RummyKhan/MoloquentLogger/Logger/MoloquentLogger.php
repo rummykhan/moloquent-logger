@@ -126,14 +126,4 @@ trait MoloquentLogger
 
         return $backtrace;
     }
-
-    /**
-     * Get Model Name
-     *
-     * @return string
-     */
-    protected function getMoloquentModel()
-    {
-        return get_class($this);
-    }
 }
