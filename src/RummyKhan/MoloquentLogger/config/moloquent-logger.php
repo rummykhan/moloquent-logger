@@ -3,7 +3,7 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Moloquent Logger Connection
+    | Connection
     |--------------------------------------------------------------------------
     |
     | Here you may specify the connection which will be used for logging.
@@ -14,7 +14,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Moloquent Logger table
+    | table
     |--------------------------------------------------------------------------
     |
     | Here you may specify the table/collection to store moloquent logs.
@@ -25,7 +25,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Moloquent Logger Ignore Environments
+    | Ignore Environments
     |--------------------------------------------------------------------------
     |
     | Here you may specify the ignore environments for the logger.
@@ -36,7 +36,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Moloquent Logger Ignore Events
+    | Ignore Events
     |--------------------------------------------------------------------------
     |
     | Here you may specify the ignore events for the models.
@@ -45,4 +45,28 @@ return [
     |
     */
     'ignore_events' => [],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Log Request ?
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify if you want to log the request that is updating the model as well.
+    | By default it's false.
+    |
+    */
+    'log_request' => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Log Scope ?
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify if you want to log the scope Classes and functions that are updating the model as well.
+    | By default it's true.
+    |
+    */
+    'log_scope' => true,
+
+
 ];
