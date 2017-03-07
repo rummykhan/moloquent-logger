@@ -139,6 +139,6 @@ trait MoloquentLogger
      */
     protected function shouldLog()
     {
-        return in_array(env('APP_ENV'), config('moloquent-logger.ignore_environments'));
+        return !in_array(env('APP_ENV'), config('moloquent-logger.ignore_environments'));
     }
 }
