@@ -4,11 +4,12 @@ namespace RummyKhan\MoloquentLogger\Logger;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
+use RummyKhan\MoloquentLogger\Model\MoloquentLog;
 
 trait MoloquentLogger
 {
     public function logs() {
-        return $this->morphMany(Log::class,'moloquent');
+        return $this->morphMany(MoloquentLog::class,'moloquent');
     }
 
     public static function boot()
@@ -27,28 +28,42 @@ trait MoloquentLogger
 
     }
 
-    protected function moloquentCreated()
+    protected function moloquentCreated($action='create')
     {
-
+        $this->logs()->save(new MoloquentLog([
+            'after' => $this->getMoloquentChangedAttributes(),
+            'after_model' => $this->toArray(),
+            'scope' => $this->getMoloquentPublicScope('function', 'create'),
+            'user_id' => Auth::id() ?: null,
+            'action' => $action,
+            'request' => Request::all()
+        ]));
     }
 
     protected function moloquentUpdated($action='update')
     {
-        $this->logs()->save(new Log([
-            'before' => json_encode($this->getMoloquentDifferenceFromChanged()),
-            'after' => json_encode($this->getMoloquentChangedAttributes()),
-            'model_before' => json_encode($this->getMoloquentFresh()),
-            'model_after' => json_encode($this->toArray()),
+        $this->logs()->save(new MoloquentLog([
+            'before' => $this->getMoloquentDifferenceFromChanged(),
+            'after' => $this->getMoloquentChangedAttributes(),
+            'before_model' => $this->getMoloquentFresh(),
+            'after_model' => $this->toArray(),
             'scope' => $this->getMoloquentPublicScope('function', 'save'),
             'user_id' => Auth::id() ?: null,
             'action' => $action,
-            'request' => json_encode(Request::all())
+            'request' => Request::all()
         ]));
     }
 
-    protected function moloquentDeleted()
+    protected function moloquentDeleted($action='delete')
     {
-
+        $this->logs()->save(new MoloquentLog([
+            'before' => $this->getMoloquentDifferenceFromChanged(),
+            'before_model' => $this->getMoloquentFresh(),
+            'scope' => $this->getMoloquentPublicScope('function', 'delete'),
+            'user_id' => Auth::id() ?: null,
+            'action' => $action,
+            'request' => Request::all()
+        ]));
     }
 
     /**

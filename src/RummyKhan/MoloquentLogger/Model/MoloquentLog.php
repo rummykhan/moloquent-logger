@@ -1,18 +1,23 @@
 <?php
 
-namespace RummyKhan\MoloquentLogger\Logger;
+namespace RummyKhan\MoloquentLogger\Model;
 
+use Illuminate\Support\Facades\Auth;
 use Jenssegers\Mongodb\Eloquent\Model;
 
-class Log extends Model
+class MoloquentLog extends Model
 {
     protected $fillable = [
-        'before_attributes', 'after_attributes', 'before_model', 'after_model',
-        'scope', 'action', 'request'
+        'before', 'after', 'before_model', 'after_model',
+        'scope', 'action', 'request', 'user_id'
     ];
 
     protected $attributes = [
-        'request' => null
+        'request' => null,
+        'before' => null,
+        'after' => null,
+        'before_model' => null,
+        'after_model' => null
     ];
 
     public function __construct($attributes = [])
