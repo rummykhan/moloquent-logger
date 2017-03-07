@@ -33,7 +33,7 @@ php artisan vendor:publish
 In `config/moloquent-logger.php` there are certain options which you can use to control the logging behavior of you application.
 
 | Variable               | Description                                                       | Default                 |
-|:----------------------:|:------------------------------------------------------------------|:-----------------------:| 
+|:---------------------- |:------------------------------------------------------------------|:------------------------| 
 | `connection`           |  Database Connection for logs (`string`).                         | `env('DB_CONNECTION')`  |
 | `collection`           | Collection for moloquent logs. (`string`)                         |   `moloquent_logs`      |
 | `ignore_environments`  | Environment for which you don't want to perform logging. (`array`)|    `['test']`           |
