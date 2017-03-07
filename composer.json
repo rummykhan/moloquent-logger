@@ -1,5 +1,5 @@
 {
-    "name": "rummykhan/mongomies",
+    "name": "rummykhan/moloquent-logger",
     "description": "Log Moloquent model changes to logs table",
     "type": "library",
     "require": {
