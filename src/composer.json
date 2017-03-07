@@ -1,0 +1,22 @@
+{
+    "name": "rummykhan/mongomies",
+    "description": "Log Moloquent model changes to logs table",
+    "type": "library",
+    "require": {
+        "laravel/framework": "5.*",
+        "jenssegers/mongodb": "^3.*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rehan Manzoor",
+            "email": "rehan_manzoor@outlook.com"
+        }
+    ],
+    "autoload":{
+        "psr-4": {
+            "RummyKhan\\MoloquentLogger\\" : "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
