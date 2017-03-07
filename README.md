@@ -3,10 +3,10 @@ Moloquent Logger
 
 A Laravel 5 package to log changes of your Mongodb Models.
 
-#### Dependencies
+### Dependencies
 - `jenssegers/mongodb`
 
-#### Installation
+### Installation
 
 Install using composer:
 
@@ -14,7 +14,7 @@ Install using composer:
 composer require rummykhan/moloquent-logger
 ```
 
-#### Add Service Provider
+### Add Service Provider
 
 Add service provider in `config/app.php`:
 
@@ -22,14 +22,14 @@ Add service provider in `config/app.php`:
 RummyKhan\MoloquentLogger\MoloquentLoggerServiceProvider::class,,
 ```
 
-#### Publish Configuration
+### Publish Configuration
 
 Publish the configuration using command:
 
 ```bash
 php artisan vendor:publish
 ```
-#### Configure your application logging behavior
+### Configure your application logging behavior
 In `config/moloquent-logger.php` there are certain options which you can use to control the logging behavior of you application.
 
 | Variable               | Description                                                       | Default                 |
@@ -38,7 +38,7 @@ In `config/moloquent-logger.php` there are certain options which you can use to 
 | `collection`           | Collection for moloquent logs. (`string`)                         |   `moloquent_logs`      |
 | `ignore_environments`  | Environment for which you don't want to perform logging. (`array`)|    `['test']`           |
 
-#### Add MoloquentLogger Trait
+### Add MoloquentLogger Trait
 Any Model for which you want to track changes add `MoloquentLogger` Trait to that Model.
 
 e.g.
@@ -58,7 +58,7 @@ class Post extends Model{
 
 ```
 
-#### Log Collection Document Structure
+### Log Collection Document Structure
 
 ```bson
 {
@@ -105,7 +105,7 @@ class Post extends Model{
     "created_at" : ISODate("2017-03-07T22:41:33.359Z")
 }
 ```
-#### Document Description
+### Document Description
 
 | Attribute               | Description                                                       |
 |:----------------------  |:------------------------------------------------------------------| 
@@ -121,7 +121,7 @@ class Post extends Model{
 | `moloquent_type`        | Model being modified. [Morph Many](https://laravel.com/docs/5.3/eloquent-relationships#polymorphic-relations)|
 | `moloquent_id`          | Id of Model being modified. [Morph Many](https://laravel.com/docs/5.3/eloquent-relationships#polymorphic-relations)|
 
-#### Access Logs
+### Access Logs
 To access logs for a record
 ```php
 
