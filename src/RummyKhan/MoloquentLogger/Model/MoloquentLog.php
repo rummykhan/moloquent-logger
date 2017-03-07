@@ -23,6 +23,9 @@ class MoloquentLog extends Model
     public function __construct($attributes = [])
     {
         parent::__construct($attributes);
+
+        $this->connection = config('moloquent_logger.connection') ?: env('DB_CONNECTION');
+        $this->collection = config('moloquent_logger.collection') ?: 'moloquent_logs';
     }
 
     /**
