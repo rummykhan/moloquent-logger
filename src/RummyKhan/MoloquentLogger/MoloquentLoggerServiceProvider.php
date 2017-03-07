@@ -21,6 +21,9 @@ class MoloquentLoggerServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
+        $this->publishes([
+            __DIR__ . '/config/moloquent-logger.php' => config_path('moloquent-logger.php')
+        ], 'config');
     }
 
     /**
