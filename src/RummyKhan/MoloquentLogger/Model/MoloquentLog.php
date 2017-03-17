@@ -2,16 +2,27 @@
 
 namespace RummyKhan\MoloquentLogger\Model;
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Jenssegers\Mongodb\Eloquent\Model;
 
+/**
+ * Class MoloquentLog
+ * @package RummyKhan\MoloquentLogger\Model
+ */
 class MoloquentLog extends Model
 {
+    /**
+     * @var array
+     */
     protected $fillable = [
         'before', 'after', 'before_model', 'after_model',
         'scope', 'action', 'request', 'user_id'
     ];
 
+    /**
+     * @var array
+     */
     protected $attributes = [
         'request' => null,
         'before' => null,
@@ -20,6 +31,11 @@ class MoloquentLog extends Model
         'after_model' => null
     ];
 
+    /**
+     * MoloquentLog constructor.
+     *
+     * @param array $attributes
+     */
     public function __construct($attributes = [])
     {
         parent::__construct($attributes);
@@ -34,5 +50,10 @@ class MoloquentLog extends Model
     public function loggable()
     {
         return $this->morphTo();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', '_id');
     }
 }
