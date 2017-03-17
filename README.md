@@ -3,6 +3,10 @@ Moloquent Logger
 
 A Laravel 5 package to log changes of your Mongodb Models.
 
+<p align="center">
+<img src="http://rehanmanzoor.me/moloquent-logger.png" height="275">
+</p>
+
 ### Dependencies
 - `jenssegers/mongodb`
 
@@ -131,12 +135,22 @@ dd($post->logs);
 
 ```
 
-### Get State On
-Get state on specific date, using string date format understandable by PHP `Date`.
+### Get State After
+Get state after specific date, using string date format understandable by PHP `Date`.
 ```php
 
 $post = Post::find(1);
 
-dd($post->stateOn('2017-03-17'));
+dd($post->stateAfter('2017-03-17'));
+
+```
+
+### Get State Before
+Get state before specific date, using string date format understandable by PHP `Date`.
+```php
+
+$post = Post::find(1);
+
+dd($post->stateBefore('2017-03-17'));
 
 ```
