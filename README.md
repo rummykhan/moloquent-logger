@@ -4,7 +4,7 @@ Moloquent Logger
 A Laravel 5 package to log changes of your Mongodb Models.
 
 <p align="center">
-<img src="http://rehanmanzoor.me/moloquent-logger.png" height="275">
+<img src="http://rehanmanzoor.me/moloquent-logger.png" height="100">
 </p>
 
 ### Dependencies
