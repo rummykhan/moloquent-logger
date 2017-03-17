@@ -130,3 +130,13 @@ $post = Post::find(1);
 dd($post->logs);
 
 ```
+
+### Get State On
+Get state on specific date, using string date format understandable by PHP `Date`.
+```php
+
+$post = Post::find(1);
+
+dd($post->stateOn('2017-03-17'));
+
+```
